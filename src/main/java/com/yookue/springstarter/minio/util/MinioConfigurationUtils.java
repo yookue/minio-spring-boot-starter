@@ -17,7 +17,7 @@
 package com.yookue.springstarter.minio.util;
 
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -54,17 +54,12 @@ public abstract class MinioConfigurationUtils {
         if (StringUtils.isNoneBlank(properties.getUserAgentName(), properties.getUserAgentVersion())) {
             result.setAppInfo(properties.getUserAgentName(), properties.getUserAgentVersion());
         }
-        if (BooleanUtils.isTrue(properties.getEnableAccelerateEndpoint())) {
-            result.enableAccelerateEndpoint();
-        } else {
-            result.disableAccelerateEndpoint();
-        }
-        if (BooleanUtils.isTrue(properties.getEnableDualStackEndpoint())) {
+        if (BooleanUtils.isTrue(properties.getDualStackEnabled())) {
             result.enableDualStackEndpoint();
         } else {
             result.disableDualStackEndpoint();
         }
-        if (BooleanUtils.isTrue(properties.getEnableVirtualStyleEndpoint())) {
+        if (BooleanUtils.isTrue(properties.getVirtualStyleEnabled())) {
             result.enableVirtualStyleEndpoint();
         } else {
             result.disableVirtualStyleEndpoint();

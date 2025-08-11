@@ -21,12 +21,12 @@ import jakarta.annotation.Nonnull;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import com.yookue.commonplexus.springcondition.annotation.ConditionalOnAllProperties;
-import com.yookue.springstarter.minio.property.MinioProperties;
-import com.yookue.springstarter.minio.util.MinioConfigurationUtils;
+import com.yookue.commonplexus.springutil.property.MinioProperties;
+import com.yookue.commonplexus.springutil.util.MinioConfigWraps;
 import io.minio.MinioClient;
 
 
@@ -43,15 +43,22 @@ import io.minio.MinioClient;
     @ConditionalOnProperty(prefix = MinioAutoConfiguration.PROPERTIES_PREFIX, name = "host")
 })
 @ConditionalOnClass(value = MinioClient.class)
-@EnableConfigurationProperties(value = MinioProperties.class)
 @SuppressWarnings({"JavadocDeclaration", "JavadocLinkAsPlainText"})
 public class MinioAutoConfiguration {
     public static final String PROPERTIES_PREFIX = "spring.minio";    // $NON-NLS-1$
+    public static final String MINIO_PROPERTIES = "minioProperties";    // $NON-NLS-1$
     public static final String MINIO_CLIENT = "minioClient";    // $NON-NLS-1$
+
+    @Bean(name = MINIO_PROPERTIES)
+    @ConditionalOnMissingBean(name = MINIO_PROPERTIES)
+    @ConfigurationProperties(prefix = PROPERTIES_PREFIX)
+    public MinioProperties minioProperties() {
+        return new MinioProperties();
+    }
 
     @Bean(name = MINIO_CLIENT)
     @ConditionalOnMissingBean(name = MINIO_CLIENT)
     public MinioClient minioClient(@Nonnull MinioProperties properties) throws Exception {
-        return MinioConfigurationUtils.minioClient(properties);
+        return MinioConfigWraps.minioClient(properties);
     }
 }

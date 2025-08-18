@@ -24,7 +24,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.yookue.commonplexus.springcondition.annotation.ConditionalOnAllProperties;
 import com.yookue.commonplexus.springutil.property.MinioProperties;
 import com.yookue.commonplexus.springutil.util.MinioConfigWraps;
 import io.minio.MinioClient;
@@ -34,14 +33,13 @@ import io.minio.MinioClient;
  * Configuration for {@link io.minio.MinioClient}
  *
  * @author David Hsing
+ *
  * @reference "https://min.io/"
+ *
  * @see io.minio.MinioClient
  */
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnAllProperties(value = {
-    @ConditionalOnProperty(prefix = MinioAutoConfiguration.PROPERTIES_PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true),
-    @ConditionalOnProperty(prefix = MinioAutoConfiguration.PROPERTIES_PREFIX, name = "host")
-})
+@ConditionalOnProperty(prefix = MinioAutoConfiguration.PROPERTIES_PREFIX, name = "endpoint")
 @ConditionalOnClass(value = MinioClient.class)
 @SuppressWarnings({"JavadocDeclaration", "JavadocLinkAsPlainText"})
 public class MinioAutoConfiguration {

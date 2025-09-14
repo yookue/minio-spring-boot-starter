@@ -8,7 +8,7 @@ Spring Boot application integrates `minio` quickly, which is a high performance 
 
 ```xml
     <dependency>
-        <groupId>com.yookue.springstarter</groupId>
+        <groupId>cn.unikue.springstarter</groupId>
         <artifactId>minio-spring-boot-starter</artifactId>
         <version>LATEST</version>
     </dependency>
@@ -33,7 +33,7 @@ spring:
 
 ## Document
 
-- Github: https://github.com/yookue/minio-spring-boot-starter
+- Github: https://github.com/unikueltd/minio-spring-boot-starter
 - Minio homepage: https://min.io
 - Minio github: https://github.com/minio/minio
 
@@ -49,12 +49,12 @@ See the `NOTICE.txt` file for required notices and attributions.
 
 ## Donation
 
-You like this package? Then [donate to us](https://yookue.com/donation) to support the development.
+You like this package? Then [donate to us](https://unikue.cn/donation) to support the development.
 
 ## Copyright
 
-Beijing Yookue Network Technology Ltd.
+Beijing Unikue Network Technology Ltd.
 
 ## Website
 
-- Yookue: https://yookue.com
+- Unikue: https://unikue.cn
